@@ -1,0 +1,4 @@
+class_name GlobalEnums
+extends Node
+
+enum GameStates { LOAD_LEVEL_STATE, DATA_LOAD_STATE, ACTIVE_GAME_STATE, PAUSED_STATE, QUITTING_GAME_STATE }

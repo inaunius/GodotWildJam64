@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bngdjkfdy81wu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ussa"]
+albedo_color = Color(0.0784314, 0.321569, 0.145098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_p5uhr"]
+material = SubResource("StandardMaterial3D_0ussa")
+
+[node name="MainMenuLevel" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "OUR GAME
+"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(27.4753, 0, 0, 0, -1.20099e-06, 27.4753, 0, -27.4753, -1.20099e-06, 0, 0, 0)
+mesh = SubResource("QuadMesh_p5uhr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.95517, 0.296058, 0, -0.296058, 0.95517, 0, 1.04932, 1.07458)

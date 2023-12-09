@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://kdjbksjyhp1r"]
+
+[node name="Buttons" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+
+[node name="Margins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margins"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Margins/VBoxContainer"]
+layout_mode = 2
+text = "Our flipping awesome game"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Container" type="Control" parent="Margins/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24.76)
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Margins/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+alignment = 1
+
+[node name="LoadGame" type="Button" parent="Margins/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(15, 45)
+layout_mode = 2
+text = "Load game
+"
+alignment = 0
+
+[node name="Settings" type="Button" parent="Margins/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(145.2, 43.32)
+layout_mode = 2
+text = "Settings"
+alignment = 0
+
+[node name="Quit" type="Button" parent="Margins/VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(145.2, 43.32)
+layout_mode = 2
+text = "Quit"
+alignment = 0

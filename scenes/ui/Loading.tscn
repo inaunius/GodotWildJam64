@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://f8do6ldgntr3"]
+
+[ext_resource type="Script" path="res://scripts/ui/FadableUI.gd" id="1_i7ivm"]
+
+[node name="Loading" type="CanvasLayer" node_paths=PackedStringArray("_ui_parent")]
+script = ExtResource("1_i7ivm")
+_ui_parent = NodePath("UIParent")
+_fade_duration = 0.5
+
+[node name="UIParent" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="UIParent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0823529, 0.0823529, 0.0823529, 1)
+
+[node name="Text" type="Label" parent="UIParent/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."

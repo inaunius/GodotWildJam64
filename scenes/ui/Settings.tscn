@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://c63rb30n3w8un"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 0
+
+[node name="BG" type="PanelContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/BG"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/BG/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="MasterLabel" type="Label" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Master
+"
+horizontal_alignment = 2
+
+[node name="MasterSpace" type="Control" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MasterSlider" type="HSlider" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+page = 2.0
+value = 98.0
+
+[node name="MusicLabel" type="Label" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Music
+"
+horizontal_alignment = 2
+
+[node name="MusicSpacer" type="Control" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VoiceLabel" type="Label" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Voice
+"
+horizontal_alignment = 2
+
+[node name="VoiceSpacer" type="Control" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VoiceSlider" type="HSlider" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SFXLabel" type="Label" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="SFXSpacer" type="Control" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="HBoxContainer/MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
