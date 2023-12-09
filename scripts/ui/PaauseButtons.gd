@@ -7,9 +7,14 @@ extends Node
 @export var _settings : Button
 @export var _quit : Button
 
+@export var _sub_container : SubContainer
+@export var _ui_root: FadableUI
+
 func _ready():
 	_resume.pressed.connect(func(): GameCycle.resume())
-	_load_game #add loading screeen
+	_load_game.pressed.connect(func(): _sub_container.show_submenu("SavesView"))
 	_save_game.pressed.connect(func(): GameCycle.save_current_game())
-	_settings #add settings screen
+	_settings.pressed.connect(func(): _sub_container.show_submenu("Settings"))
 	_quit.pressed.connect(func(): GameCycle.quit())
+	
+	_ui_root.hidden.connect(func(): _sub_container.hide_all_submenus())

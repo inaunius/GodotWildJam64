@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://dha6i38h4fvgb"]
+
+[ext_resource type="Script" path="res://scripts/ui/VolumeAdjusters.gd" id="1_p68qq"]
+
+[node name="GridContainer" type="GridContainer" node_paths=PackedStringArray("master", "music", "sfx", "voice")]
+size_flags_vertical = 3
+columns = 3
+script = ExtResource("1_p68qq")
+master = NodePath("MasterSlider")
+music = NodePath("MusicSlider")
+sfx = NodePath("SFXSlider")
+voice = NodePath("VoiceSlider")
+
+[node name="MasterLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Master
+"
+horizontal_alignment = 2
+
+[node name="MasterSpace" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MasterSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+page = 2.0
+value = 98.0
+
+[node name="MusicLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Music
+"
+horizontal_alignment = 2
+
+[node name="MusicSpacer" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SFXLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="SFXSpacer" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VoiceLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Voice
+"
+horizontal_alignment = 2
+
+[node name="VoiceSpacer" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VoiceSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

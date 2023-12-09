@@ -32,8 +32,9 @@ func save_current_data():
 	
 	saved_data.level_name = _level_loader.get_active_level_name()
 	saved_data.data = all_pulled_data
+	saved_data.name = _compose_save_name()
 	
-	var save_full_path : String = _get_full_save_path_by_name(_compose_save_name())
+	var save_full_path : String = _get_full_save_path_by_name(saved_data.name)
 	print(save_full_path)
 	ResourceSaver.save(saved_data, save_full_path)	
 
@@ -54,6 +55,10 @@ func load_data(save_name: String):
 	for node in _save_readers:
 		node.on_load_data(loaded_save.data[node.DATA_KEY])
 
+func delete_save(name: String):
+	DirAccess.remove_absolute(_get_full_save_path_by_name(name))
+	
+	
 func get_all_saves() -> Array[SavedData]:
 	var all_saves : Array[SavedData]
 	var save_dir = DirAccess.open(SAVES_PATH)

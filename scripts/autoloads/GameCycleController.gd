@@ -24,6 +24,9 @@ func get_all_saves() -> Array[SavedData]:
 func save_current_game():
 	_persistent_data.save_current_data()
 
+func delete_save(name: String):
+	_persistent_data.delete_save(name)
+
 func pause():
 	if (_state_machine.get_state_name() != GlobalEnums.GameStates.ACTIVE_GAME_STATE):
 		printerr("Can only pause in ActiveGameState")

@@ -1,6 +1,7 @@
 res://scripts/ui
-res://resources/templates
 res://scripts/autoloads
+res://scenes/ui/submenus/settings
+res://resources/templates
 res://scenes/ui
 res://resources/instances
 res://scenes/architecture

@@ -2,6 +2,10 @@ class_name FadableUI
 extends CanvasLayer
 
 
+signal shown
+signal hidden 
+
+
 @export var _ui_parent : Control
 @export var _fade_duration : float
 

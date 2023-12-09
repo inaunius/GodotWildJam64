@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5lqnvq8noy8a"]
+[gd_scene load_steps=7 format=3 uid="uid://b5lqnvq8noy8a"]
 
 [ext_resource type="Script" path="res://scripts/ui/FadableUI.gd" id="1_vtg5a"]
 [ext_resource type="PackedScene" uid="uid://kdjbksjyhp1r" path="res://scenes/ui/Buttons.tscn" id="2_41ufq"]
 [ext_resource type="Script" path="res://scripts/ui/PaauseButtons.gd" id="3_0gnnk"]
+[ext_resource type="Script" path="res://scripts/ui/SubContainer.gd" id="4_3jpd2"]
+[ext_resource type="PackedScene" uid="uid://b4v2vneo1tw0j" path="res://scenes/ui/submenus/SavesView.tscn" id="5_adajq"]
+[ext_resource type="PackedScene" uid="uid://c63rb30n3w8un" path="res://scenes/ui/submenus/settings/Settings.tscn" id="6_l8wb7"]
 
 [node name="Pause" type="CanvasLayer" node_paths=PackedStringArray("_ui_parent")]
 script = ExtResource("1_vtg5a")
@@ -34,7 +37,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Buttons" parent="UiParent/BG/HBoxContainer" node_paths=PackedStringArray("_resume", "_load_game", "_save_game", "_settings", "_quit") instance=ExtResource("2_41ufq")]
+[node name="Buttons" parent="UiParent/BG/HBoxContainer" node_paths=PackedStringArray("_resume", "_load_game", "_save_game", "_settings", "_quit", "_sub_container", "_ui_root") instance=ExtResource("2_41ufq")]
 layout_mode = 2
 script = ExtResource("3_0gnnk")
 _resume = NodePath("Margins/VBoxContainer/Buttons/Resume")
@@ -42,6 +45,8 @@ _load_game = NodePath("Margins/VBoxContainer/Buttons/LoadGame")
 _save_game = NodePath("Margins/VBoxContainer/Buttons/SaveGame")
 _settings = NodePath("Margins/VBoxContainer/Buttons/Settings")
 _quit = NodePath("Margins/VBoxContainer/Buttons/Quit")
+_sub_container = NodePath("../SubContainer")
+_ui_root = NodePath("../../../..")
 
 [node name="Margins" parent="UiParent/BG/HBoxContainer/Buttons" index="0"]
 theme_override_constants/margin_left = 110
@@ -65,8 +70,25 @@ text = "Save game
 "
 alignment = 0
 
-[node name="SubMenu" type="Control" parent="UiParent/BG/HBoxContainer"]
+[node name="SubContainer" type="Control" parent="UiParent/BG/HBoxContainer" node_paths=PackedStringArray("_sub_menus")]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("4_3jpd2")
+_sub_menus = [NodePath("SavesView"), NodePath("Settings")]
+
+[node name="SavesView" parent="UiParent/BG/HBoxContainer/SubContainer" instance=ExtResource("5_adajq")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" parent="UiParent/BG/HBoxContainer/SubContainer" instance=ExtResource("6_l8wb7")]
+visible = false
+layout_mode = 1
 
 [editable path="UiParent/BG/HBoxContainer/Buttons"]
