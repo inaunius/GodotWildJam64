@@ -8,9 +8,14 @@
 - Dash
 - Doors (and keys and passes)
 - Melee combat (weak so the player is encouraged to ether hit on distance or stealth)
-- Healing ??
+- Healing ?? :
+    - Using different types of light to recover diferent properties (like ultraviolet to recover mental health, regular to recover bullets etc)
+    - Having diegetic (it does exist in the game world) health indicator (like in Dead Space)
 - Shooting ??
+- Mental health ??
 - Dragging items physically
  
 
 ?? - *implementation needs to be dicused* 
+
+?? : - *there are some ideas*
