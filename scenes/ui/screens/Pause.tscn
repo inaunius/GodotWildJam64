@@ -79,6 +79,9 @@ size_flags_horizontal = 3
 script = ExtResource("4_3jpd2")
 _sub_menus = [NodePath("SavesView"), NodePath("Settings")]
 
+[node name="Settings" parent="UiParent/BG/MarginContainer/HBoxContainer/SubContainer" instance=ExtResource("6_gqhw4")]
+layout_mode = 1
+
 [node name="SavesView" parent="UiParent/BG/MarginContainer/HBoxContainer/SubContainer" instance=ExtResource("5_adajq")]
 visible = false
 layout_mode = 1
@@ -89,9 +92,5 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Settings" parent="UiParent/BG/MarginContainer/HBoxContainer/SubContainer" instance=ExtResource("6_gqhw4")]
-visible = false
-layout_mode = 1
 
 [editable path="UiParent/BG/MarginContainer/HBoxContainer/Buttons"]

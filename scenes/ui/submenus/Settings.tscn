@@ -1,43 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://c63rb30n3w8un"]
+[gd_scene load_steps=4 format=3 uid="uid://c63rb30n3w8un"]
 
 [ext_resource type="PackedScene" uid="uid://dha6i38h4fvgb" path="res://scenes/ui/submenus/additional/VolumeAdjusters.tscn" id="1_4q8bf"]
-[ext_resource type="Script" path="res://scripts/ui/SettingsSync.gd" id="1_dpjgo"]
+[ext_resource type="Script" path="res://scripts/ui/settings/SettingsSync.gd" id="1_lhw6c"]
+[ext_resource type="PackedScene" uid="uid://cqbmtsscrvei8" path="res://scenes/ui/submenus/additional/SreenOptions.tscn" id="3_hugjv"]
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("_volume_adjusters")]
+[node name="Settings" type="Control" node_paths=PackedStringArray("_volume_adjusters", "_screen_options")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_dpjgo")
-_volume_adjusters = NodePath("MarginContainer/BG/MarginContainer/VBoxContainer/GridContainer")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lhw6c")
+_volume_adjusters = NodePath("BG/Margins/SettingsParagraphs/VolumeAdjusters")
+_screen_options = NodePath("BG/Margins/SettingsParagraphs/SreenOptions")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="BG" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 0
 
-[node name="BG" type="PanelContainer" parent="MarginContainer"]
+[node name="Margins" type="MarginContainer" parent="BG"]
 layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BG"]
-layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BG/MarginContainer"]
+[node name="SettingsParagraphs" type="VBoxContainer" parent="BG/Margins"]
 layout_mode = 2
-size_flags_vertical = 0
 alignment = 1
 
-[node name="GridContainer" parent="MarginContainer/BG/MarginContainer/VBoxContainer" instance=ExtResource("1_4q8bf")]
+[node name="Title" type="Label" parent="BG/Margins/SettingsParagraphs"]
 layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Sound" type="Label" parent="BG/Margins/SettingsParagraphs"]
+layout_mode = 2
+text = "Sound:"
+
+[node name="VolumeAdjusters" parent="BG/Margins/SettingsParagraphs" instance=ExtResource("1_4q8bf")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Video" type="Label" parent="BG/Margins/SettingsParagraphs"]
+layout_mode = 2
+text = "Video:"
+
+[node name="SreenOptions" parent="BG/Margins/SettingsParagraphs" instance=ExtResource("3_hugjv")]
+layout_mode = 2
+size_flags_horizontal = 1

@@ -1,6 +1,11 @@
-class_name PersistentData
+class_name DataSaveLoad
 extends Node
 
+
+
+const SETTINGS_NAME = "Settings"
+const SETTINGS_PATH = "user://Settings/"
+const FULL_SETTINGS_PATH =  SETTINGS_PATH + SETTINGS_NAME + FILE_EXTENSION 
 
 const SAVES_PATH = "user://Saves/"
 const FILE_EXTENSION = ".tres"
@@ -19,6 +24,7 @@ func _ready():
 			_update_save_readers())	
 	
 	DirAccess.make_dir_absolute(SAVES_PATH)
+	DirAccess.make_dir_absolute(SETTINGS_PATH)
 
 func save_current_data():
 	_update_savables()
@@ -58,9 +64,9 @@ func load_data(save_name: String):
 	for node in _save_readers:
 		node.on_load_data(loaded_save.data[node.DATA_KEY])
 
+
 func delete_save(name: String):
 	DirAccess.remove_absolute(_get_full_save_path_by_name(name))
-	
 	
 func get_all_saves() -> Array[SavedData]:
 	var all_saves : Array[SavedData]
@@ -75,6 +81,17 @@ func get_all_saves() -> Array[SavedData]:
 	return all_saves
 
 	save_dir.list_dir_end()
+
+func load_settings() -> SettingsData:
+	if ResourceLoader.exists(FULL_SETTINGS_PATH):
+		return ResourceLoader.load(FULL_SETTINGS_PATH)
+	else:
+		ResourceSaver.save(SettingsData.new(), FULL_SETTINGS_PATH)
+		return null
+
+func save_settings(settings: SettingsData):
+	print(FULL_SETTINGS_PATH)
+	ResourceSaver.save(settings, FULL_SETTINGS_PATH)
 
 func _update_savables():
 	_savables = []

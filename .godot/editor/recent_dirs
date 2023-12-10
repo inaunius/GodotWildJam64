@@ -1,5 +1,7 @@
-res://scripts/gameplay
+res://scripts/ui/settings
 res://scripts/ui
+res://sprites/logos
+res://scripts/gameplay
 res://scripts/autoloads
 res://resources/templates
 res://scenes/ui

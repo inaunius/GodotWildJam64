@@ -8,16 +8,24 @@ extends GridContainer
 
 
 func _ready():
-	sync_volume_with_server()
+	sync_with_Settings()
 	
-	master.changed.connect(func(value: float): AudioControl.set_master_volume(value))
-	music.changed.connect(func(value: float): AudioControl.set_music_volume(value))
-	sfx.changed.connect(func(value: float): AudioControl.set_sfx_volume(value))
-	voice.changed.connect(func(value: float): AudioControl.set_voice_volume(value))
+	master.changed.connect(func(value: float): 
+		Settings.master_volume = value
+		Settings.apply_sound_settings())
+	music.changed.connect(func(value: float): 
+		Settings.music_volume = value
+		Settings.apply_sound_settings())
+	sfx.changed.connect(func(value: float): 
+		Settings.sfx_volume = value
+		Settings.apply_sound_settings())
+	voice.changed.connect(func(value: float): 
+		Settings.voice_volume = value
+		Settings.apply_sound_settings())
 
 
-func sync_volume_with_server():
-	master.value = AudioControl.master_volume
-	music.value = AudioControl.music_volume
-	sfx.value = AudioControl.sfx_volume
-	voice.value = AudioControl.voice_volume
+func sync_with_Settings():
+	master.value = Settings.master_volume
+	music.value = Settings.music_volume
+	sfx.value = Settings.sfx_volume
+	voice.value = Settings.voice_volume

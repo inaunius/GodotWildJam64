@@ -59,6 +59,6 @@ func _unhandled_input(event):
 		rotate_y(look_around*MOUSE_SENSIVITY)
 		_camera.rotate_x(nod*MOUSE_SENSIVITY)
 		
-		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-30), deg_to_rad(60))
+		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 		
 		

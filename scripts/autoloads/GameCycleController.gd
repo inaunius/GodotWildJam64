@@ -4,7 +4,7 @@ extends Node
 const MAIN_MENU_LEVEL_NAME = "MainMenu"
 
 @onready var _state_machine : GameStateMachine = $/root/Main/GameStateMachine
-@onready var _persistent_data : PersistentData = $/root/Main/Services/PersistentData
+@onready var _persistent_data : DataSaveLoad = $/root/Main/Services/DataSaveLoad
 @onready var _level_loader : LevelLoader = $/root/Main/Services/LevelLoader
 
 

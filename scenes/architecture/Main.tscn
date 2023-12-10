@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Bootstrap.gd" id="1_2m3l7"]
 [ext_resource type="Script" path="res://scripts/services/GamePause.gd" id="1_l3qkl"]
 [ext_resource type="Script" path="res://scripts/services/LevelLoader.gd" id="2_mdci6"]
-[ext_resource type="Script" path="res://scripts/services/PersistentData.gd" id="3_l3wq0"]
+[ext_resource type="Script" path="res://scripts/services/DataSaveLoad.gd" id="3_l3wq0"]
 [ext_resource type="Resource" uid="uid://dkm6u8cb7tbax" path="res://resources/instances/levels/MainMenu.tres" id="3_m7q4d"]
 [ext_resource type="Resource" uid="uid://ishc5w4ucphh" path="res://resources/instances/levels/TESTLevel.tres" id="4_06ltl"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/GameStateMachine.gd" id="4_ucw0j"]
@@ -42,7 +42,12 @@ script = ExtResource("2_mdci6")
 _level_parent = NodePath("../../LevelParent")
 _levels = Array[Resource("res://resources/templates/Level.gd")]([ExtResource("3_m7q4d"), ExtResource("4_06ltl")])
 
-[node name="PersistentData" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
+[node name="DataSaveLoad" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
+script = ExtResource("3_l3wq0")
+_level_parent = NodePath("../../LevelParent")
+_level_loader = NodePath("../LevelLoader")
+
+[node name="DataSaveLoad2" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
 script = ExtResource("3_l3wq0")
 _level_parent = NodePath("../../LevelParent")
 _level_loader = NodePath("../LevelLoader")
@@ -64,7 +69,7 @@ _state_machine = NodePath("..")
 
 [node name="DataLoadState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_persistent_data", "_level_load_ui", "_state_machine")]
 script = ExtResource("6_2tou2")
-_persistent_data = NodePath("../../Services/PersistentData")
+_persistent_data = NodePath("../../Services/DataSaveLoad")
 _level_load_ui = NodePath("../../LoadingUI")
 _state_machine = NodePath("..")
 enum_key = 1

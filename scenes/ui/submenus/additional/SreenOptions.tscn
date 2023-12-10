@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqbmtsscrvei8"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings/SreenOptions.gd" id="1_8aa14"]
+[ext_resource type="Script" path="res://scripts/ui/settings/Vector2iFields.gd" id="1_sy04w"]
+
+[node name="MarginContainer" type="MarginContainer" node_paths=PackedStringArray("resolution_provider", "screen_mode_options", "apply_button")]
+offset_top = 309.0
+offset_right = 1280.0
+offset_bottom = 410.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_8aa14")
+resolution_provider = NodePath("VBoxContainer/Resolution")
+screen_mode_options = NodePath("VBoxContainer/ScreenMode/OptionButton")
+apply_button = NodePath("VBoxContainer/Apply/Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Resolution" type="HBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("x", "y")]
+layout_mode = 2
+script = ExtResource("1_sy04w")
+x = NodePath("Width")
+y = NodePath("Height")
+
+[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+text = "Resolition: "
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Width" type="LineEdit" parent="VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "Width"
+virtual_keyboard_type = 2
+
+[node name="X" type="Label" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "x"
+
+[node name="Height" type="LineEdit" parent="VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+placeholder_text = "Height"
+virtual_keyboard_type = 2
+
+[node name="ScreenMode" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ScreenMode"]
+layout_mode = 2
+text = "Screen mode: "
+
+[node name="Spacer" type="Control" parent="VBoxContainer/ScreenMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/ScreenMode"]
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen window"
+popup/item_1/id = 1
+popup/item_2/text = "Windowed"
+popup/item_2/id = 2
+
+[node name="Apply" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Apply"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/Apply"]
+custom_minimum_size = Vector2(103.915, 0)
+layout_mode = 2
+text = "Apply"

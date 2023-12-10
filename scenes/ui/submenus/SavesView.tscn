@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4v2vneo1tw0j"]
 
-[ext_resource type="Script" path="res://scripts/ui/SavesView.gd" id="1_lfbxi"]
-[ext_resource type="PackedScene" uid="uid://bi51b3hqonllr" path="res://scenes/ui/SaveCard.tscn" id="2_rg8rc"]
+[ext_resource type="Script" path="res://scripts/ui/settings/SavesView.gd" id="1_lfbxi"]
+[ext_resource type="PackedScene" uid="uid://bi51b3hqonllr" path="res://scenes/ui/submenus/additional/SaveCard.tscn" id="2_rg8rc"]
 
 [node name="SavesView" type="PanelContainer" node_paths=PackedStringArray("save_cards_parent")]
 offset_right = 1920.0

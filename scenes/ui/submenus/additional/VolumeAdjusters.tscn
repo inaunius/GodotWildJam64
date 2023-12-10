@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/VolumeAdjusters.gd" id="1_p68qq"]
 
-[node name="GridContainer" type="GridContainer" node_paths=PackedStringArray("master", "music", "sfx", "voice")]
+[node name="VolumeAdjusters" type="GridContainer" node_paths=PackedStringArray("master", "music", "sfx", "voice")]
 offset_top = -1.0
 offset_right = 91.0
 offset_bottom = 103.0
