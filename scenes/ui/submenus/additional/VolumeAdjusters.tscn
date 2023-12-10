@@ -3,6 +3,9 @@
 [ext_resource type="Script" path="res://scripts/ui/VolumeAdjusters.gd" id="1_p68qq"]
 
 [node name="GridContainer" type="GridContainer" node_paths=PackedStringArray("master", "music", "sfx", "voice")]
+offset_top = -1.0
+offset_right = 91.0
+offset_bottom = 103.0
 size_flags_vertical = 3
 columns = 3
 script = ExtResource("1_p68qq")
@@ -27,8 +30,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-page = 2.0
-value = 98.0
+max_value = 1.0
+step = 0.01
 
 [node name="MusicLabel" type="Label" parent="."]
 layout_mode = 2
@@ -46,6 +49,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
 
 [node name="SFXLabel" type="Label" parent="."]
 layout_mode = 2
@@ -62,6 +67,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
 
 [node name="VoiceLabel" type="Label" parent="."]
 layout_mode = 2
@@ -79,3 +86,5 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+max_value = 1.0
+step = 0.01

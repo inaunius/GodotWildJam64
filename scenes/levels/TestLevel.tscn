@@ -1,37 +1,98 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2w2wdbclppjg"]
+[gd_scene load_steps=13 format=3 uid="uid://b2w2wdbclppjg"]
 
-[sub_resource type="Gradient" id="Gradient_n3w41"]
+[ext_resource type="PackedScene" uid="uid://5i8ss0lsc4xa" path="res://scenes/gameplay/TESTPlayer.tscn" id="1_qr4qj"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fl4go"]
-domain_warp_enabled = true
+[sub_resource type="Gradient" id="Gradient_kisp4"]
+offsets = PackedFloat32Array(0, 0.488636, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.170455, 0.170455, 0.170455, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_soxph"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ky3vc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_totto"]
 seamless = true
-color_ramp = SubResource("Gradient_n3w41")
-noise = SubResource("FastNoiseLite_fl4go")
+color_ramp = SubResource("Gradient_kisp4")
+noise = SubResource("FastNoiseLite_ky3vc")
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_42dy6"]
-sky_top_color = Color(0.235294, 0.447059, 0.745098, 1)
-sky_horizon_color = Color(0.517647, 0.686275, 0.745098, 1)
-sky_curve = 0.0776449
-sky_cover = SubResource("NoiseTexture2D_soxph")
-ground_bottom_color = Color(0.168627, 0.168627, 0.168627, 1)
-ground_horizon_color = Color(0.513726, 0.686275, 0.760784, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_efnci"]
+sky_top_color = Color(0.207843, 0.584314, 0.8, 1)
+sky_horizon_color = Color(0.407843, 0.705882, 0.909804, 1)
+sky_curve = 0.0750001
+sky_cover = SubResource("NoiseTexture2D_totto")
+ground_bottom_color = Color(0.141176, 0.160784, 0.133333, 1)
+ground_horizon_color = Color(0.67451, 0.682353, 0.698039, 1)
+ground_curve = 0.0254912
 
-[sub_resource type="Sky" id="Sky_0elf5"]
-sky_material = SubResource("ProceduralSkyMaterial_42dy6")
+[sub_resource type="Sky" id="Sky_kyl2w"]
+sky_material = SubResource("ProceduralSkyMaterial_efnci")
 
-[sub_resource type="Environment" id="Environment_gvmbe"]
+[sub_resource type="Environment" id="Environment_e11g3"]
 background_mode = 2
-sky = SubResource("Sky_0elf5")
+sky = SubResource("Sky_kyl2w")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_qaqxd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejnq4"]
+albedo_color = Color(0.360784, 0.54902, 0.282353, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_fxikc"]
+material = SubResource("StandardMaterial3D_ejnq4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5nvwg"]
+size = Vector3(15.2986, 0.167953, 15.4063)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bph2w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gooa8"]
 
 [node name="TestLevel" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-environment = SubResource("Environment_gvmbe")
+[node name="TestPlayer" parent="." instance=ExtResource("1_qr4qj")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0146582, 0, -3.6914)
-mesh = SubResource("SphereMesh_qaqxd")
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e11g3")
+
+[node name="Location" type="Node3D" parent="."]
+transform = Transform3D(4.13371, 0, 0, 0, 4.13371, 0, 0, 0, 4.13371, 0, 2.38419e-07, 0)
+
+[node name="Ground" type="StaticBody3D" parent="Location"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Location/Ground"]
+transform = Transform3D(15.5, 0, 0, 0, -6.77527e-07, 15.5, 0, -15.5, -6.77527e-07, 0, 0, 0)
+mesh = SubResource("QuadMesh_fxikc")
+
+[node name="Collision" type="CollisionShape3D" parent="Location/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0369637, -0.0851834, 0.0214844)
+shape = SubResource("BoxShape3D_5nvwg")
+
+[node name="Boxes" type="Node3D" parent="Location"]
+
+[node name="Box" type="StaticBody3D" parent="Location/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 0.952428, -0.304765, 0, 0.304765, 0.952428, -2.2977, 0.0599618, 0.40349)
+
+[node name="Collision" type="CollisionShape3D" parent="Location/Boxes/Box"]
+shape = SubResource("BoxShape3D_bph2w")
+
+[node name="Mesh" type="MeshInstance3D" parent="Location/Boxes/Box"]
+mesh = SubResource("BoxMesh_gooa8")
+
+[node name="Box2" type="StaticBody3D" parent="Location/Boxes"]
+transform = Transform3D(0.359736, 0, -0.933054, -0.149017, 0.987164, -0.057453, 0.921077, 0.159709, 0.355118, -2.2977, 0.26611, -1.14253)
+
+[node name="Collision" type="CollisionShape3D" parent="Location/Boxes/Box2"]
+shape = SubResource("BoxShape3D_bph2w")
+
+[node name="Mesh" type="MeshInstance3D" parent="Location/Boxes/Box2"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_gooa8")
+
+[node name="Box3" type="StaticBody3D" parent="Location/Boxes"]
+transform = Transform3D(0.359736, 0, -0.933054, 0, 1, 0, 0.933054, 0, 0.359736, -2.2977, -0.225895, 1.97526)
+
+[node name="Collision" type="CollisionShape3D" parent="Location/Boxes/Box3"]
+shape = SubResource("BoxShape3D_bph2w")
+
+[node name="Mesh" type="MeshInstance3D" parent="Location/Boxes/Box3"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_gooa8")

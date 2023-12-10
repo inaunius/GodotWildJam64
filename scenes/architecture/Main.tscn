@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scripts/services/GamePause.gd" id="1_l3qkl"]
 [ext_resource type="Script" path="res://scripts/services/LevelLoader.gd" id="2_mdci6"]
 [ext_resource type="Script" path="res://scripts/services/PersistentData.gd" id="3_l3wq0"]
-[ext_resource type="Resource" uid="uid://dkm6u8cb7tbax" path="res://resources/instances/MainMenu.tres" id="3_m7q4d"]
-[ext_resource type="Resource" uid="uid://ishc5w4ucphh" path="res://resources/instances/Test.tres" id="4_06ltl"]
+[ext_resource type="Resource" uid="uid://dkm6u8cb7tbax" path="res://resources/instances/levels/MainMenu.tres" id="3_m7q4d"]
+[ext_resource type="Resource" uid="uid://ishc5w4ucphh" path="res://resources/instances/levels/TESTLevel.tres" id="4_06ltl"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/GameStateMachine.gd" id="4_ucw0j"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/LevelLoadState.gd" id="5_14v7s"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/DataLoadState.gd" id="6_2tou2"]
@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/ActiveGameState.gd" id="7_t4svj"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/PausedState.gd" id="8_s1hki"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/QuittingGameState.gd" id="9_m36en"]
-[ext_resource type="PackedScene" uid="uid://b5lqnvq8noy8a" path="res://scenes/ui/Pause.tscn" id="10_w2tw1"]
-[ext_resource type="PackedScene" uid="uid://f8do6ldgntr3" path="res://scenes/ui/Loading.tscn" id="11_ucfuu"]
+[ext_resource type="PackedScene" uid="uid://b5lqnvq8noy8a" path="res://scenes/ui/screens/Pause.tscn" id="10_w2tw1"]
+[ext_resource type="PackedScene" uid="uid://f8do6ldgntr3" path="res://scenes/ui/screens/Loading.tscn" id="11_ucfuu"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2m3l7")
@@ -24,9 +24,11 @@ script = ExtResource("1_2m3l7")
 [node name="PauseUI" parent="." instance=ExtResource("10_w2tw1")]
 process_mode = 3
 layer = 2
+visible = false
 
 [node name="LoadingUI" parent="." instance=ExtResource("11_ucfuu")]
 layer = 3
+visible = false
 
 [node name="Services" type="Node" parent="."]
 process_mode = 3
@@ -45,9 +47,10 @@ script = ExtResource("3_l3wq0")
 _level_parent = NodePath("../../LevelParent")
 _level_loader = NodePath("../LevelLoader")
 
-[node name="InputParser" type="Node" parent="Services"]
+[node name="InputParser" type="Node" parent="Services" node_paths=PackedStringArray("_level_loader")]
 process_mode = 3
 script = ExtResource("7_1l08v")
+_level_loader = NodePath("../LevelLoader")
 
 [node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("_assign_states")]
 script = ExtResource("4_ucw0j")
@@ -66,9 +69,10 @@ _level_load_ui = NodePath("../../LoadingUI")
 _state_machine = NodePath("..")
 enum_key = 1
 
-[node name="ActiveGameState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_level_load_ui", "_pause_ui", "_state_machine")]
+[node name="ActiveGameState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_level_loader", "_loading_ui", "_pause_ui", "_state_machine")]
 script = ExtResource("7_t4svj")
-_level_load_ui = NodePath("../../LoadingUI")
+_level_loader = NodePath("../../Services/LevelLoader")
+_loading_ui = NodePath("../../LoadingUI")
 _pause_ui = NodePath("../../PauseUI")
 _state_machine = NodePath("..")
 enum_key = 2

@@ -10,6 +10,7 @@ extends Node
 @export var _sub_container : SubContainer
 @export var _ui_root: FadableUI
 
+
 func _ready():
 	_resume.pressed.connect(func(): GameCycle.resume())
 	_load_game.pressed.connect(func(): _sub_container.show_submenu("SavesView"))

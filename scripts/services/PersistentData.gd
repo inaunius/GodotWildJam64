@@ -21,6 +21,7 @@ func _ready():
 	DirAccess.make_dir_absolute(SAVES_PATH)
 
 func save_current_data():
+	_update_savables()
 	var saved_data =  SavedData.new() 
 	var all_pulled_data : Dictionary
 	
@@ -39,10 +40,11 @@ func save_current_data():
 	ResourceSaver.save(saved_data, save_full_path)	
 
 func load_data(save_name: String):
+	_update_save_readers()
 	var full_save_path = _get_full_save_path_by_name(save_name)
 
 	if !ResourceLoader.exists(full_save_path):
-		printerr("Save with that name doesn't exist!")
+		printerr("Save with the name %s name doesn't exist!" % save_name)
 		return
 	
 	var loaded_save = ResourceLoader.load(full_save_path) as SavedData
@@ -52,6 +54,7 @@ func load_data(save_name: String):
 	if save_level_name != active_level_name:
 		printerr("The save \"%s\" is not for the active level \"%s\", it's for \"%s\"!" % [active_level_name, loaded_save.level_name])
 	
+	print(len(_save_readers))
 	for node in _save_readers:
 		node.on_load_data(loaded_save.data[node.DATA_KEY])
 
@@ -75,15 +78,17 @@ func get_all_saves() -> Array[SavedData]:
 
 func _update_savables():
 	_savables = []
-	for node in _level_parent.get_children():
-		if node.has_method("on_save_data") || "DATA_KEY" in node:
+	for node in _get_all_children(_level_parent):
+		if node.has_method("on_save_data") && "DATA_KEY" in node:
 			_savables.append(node)
+			print(node.name + "ADDED TO SAVABLES")
 	
 func _update_save_readers():
 	_save_readers = []
-	for node in _level_parent.get_children():
-		if node.has_method("on_load_data") || "DATA_KEY" in node:
+	for node in _get_all_children(_level_parent):
+		if node.has_method("on_load_data") && "DATA_KEY" in node:
 			_save_readers.append(node)
+			print(node.name + "ADDED TO SAVE READERS")
 
 func _get_full_save_path_by_name(name: String) -> String:
 	return SAVES_PATH + name + FILE_EXTENSION
@@ -95,3 +100,13 @@ func _compose_save_name() -> String:
 		save_number += 1
 		
 	return str(save_number)
+	
+func _get_all_children(node: Node) -> Array[Node]:
+	var children : Array[Node]
+	
+	for child in node.get_children():
+		children.append(child)
+		children.append_array(_get_all_children(child))
+		
+	return children
+		

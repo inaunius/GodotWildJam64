@@ -2,9 +2,9 @@ class_name GamePause
 extends Node
 
 
-func Pause():
+func pause():
 	get_tree().paused = true
 
-func Resume():
+func resume():
 	get_tree().paused = false
 

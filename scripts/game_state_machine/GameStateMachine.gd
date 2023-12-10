@@ -11,7 +11,7 @@ var _active_state : GameState
 func _ready():
 	_populate_states_dictionary()
 
-func get_state_name() -> GlobalEnums.GameStates:
+func get_current_state() -> GlobalEnums.GameStates:
 	if _active_state:
 		return _active_state.enum_key
 	else:

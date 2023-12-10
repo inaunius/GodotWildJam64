@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://ishc5w4ucphh"]
+
+[ext_resource type="PackedScene" uid="uid://b2w2wdbclppjg" path="res://scenes/levels/TESTLevel.tscn" id="1_by5ma"]
+[ext_resource type="Script" path="res://resources/templates/Level.gd" id="2_tomkn"]
+
+[resource]
+script = ExtResource("2_tomkn")
+name = "TESTLevel"
+scene = ExtResource("1_by5ma")

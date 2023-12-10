@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1f7mxmsee072"]
+
+[ext_resource type="PackedScene" uid="uid://kdjbksjyhp1r" path="res://scenes/ui/Buttons.tscn" id="1_7po4f"]
+[ext_resource type="Script" path="res://scripts/ui/buttons/MainMenuButtons.gd" id="2_c1l8t"]
+[ext_resource type="Script" path="res://scripts/ui/SubContainer.gd" id="3_f2md7"]
+[ext_resource type="PackedScene" uid="uid://b4v2vneo1tw0j" path="res://scenes/ui/submenus/SavesView.tscn" id="4_xmf8s"]
+[ext_resource type="PackedScene" uid="uid://c63rb30n3w8un" path="res://scenes/ui/submenus/Settings.tscn" id="5_1m3j5"]
+
+[node name="MainMenuUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Buttons" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("_new_game", "_load_game", "_settings", "_quit", "_sub_container") instance=ExtResource("1_7po4f")]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("2_c1l8t")
+_new_game = NodePath("Margins/VBoxContainer/Buttons/NewGame")
+_load_game = NodePath("Margins/VBoxContainer/Buttons/LoadGame")
+_settings = NodePath("Margins/VBoxContainer/Buttons/Settings")
+_quit = NodePath("Margins/VBoxContainer/Buttons/Quit")
+_sub_container = NodePath("../SubContainer")
+
+[node name="NewGame" type="Button" parent="MarginContainer/HBoxContainer/Buttons/Margins/VBoxContainer/Buttons" index="0"]
+custom_minimum_size = Vector2(15, 45)
+layout_mode = 2
+text = "New game"
+alignment = 0
+
+[node name="SubContainer" type="Control" parent="MarginContainer/HBoxContainer" node_paths=PackedStringArray("_sub_menus")]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_f2md7")
+_sub_menus = [NodePath("SavesView"), NodePath("Settings")]
+
+[node name="SavesView" parent="MarginContainer/HBoxContainer/SubContainer" instance=ExtResource("4_xmf8s")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" parent="MarginContainer/HBoxContainer/SubContainer" instance=ExtResource("5_1m3j5")]
+visible = false
+layout_mode = 1
+
+[editable path="MarginContainer/HBoxContainer/Buttons"]

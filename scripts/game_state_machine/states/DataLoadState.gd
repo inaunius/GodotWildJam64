@@ -6,4 +6,5 @@ extends GameState
 
 func on_enter(payload=""):
 	print("LOADING DATA")
+	_persistent_data.load_data(payload)
 	_level_load_ui.ui_visible = true
