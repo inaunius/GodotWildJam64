@@ -17,6 +17,7 @@ func update_saves_view():
 	_clear_list()
 		
 	for save in GameCycle.get_all_saves():
+		print(save)
 		var card_instance = _get_save_card(save)
 		save_cards_parent.add_child(card_instance)
 		

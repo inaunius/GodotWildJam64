@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Level" load_steps=3 format=3 uid="uid://ymiqnr7t138i"]
+
+[ext_resource type="PackedScene" uid="uid://6pib13net55n" path="res://scenes/levels/PeacefulHospital.tscn" id="1_rvl31"]
+[ext_resource type="Script" path="res://resources/templates/Level.gd" id="2_w0s05"]
+
+[resource]
+script = ExtResource("2_w0s05")
+name = "PeacefulHospital"
+scene = ExtResource("1_rvl31")

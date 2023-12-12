@@ -2,6 +2,7 @@ class_name GameCycleController
 extends Node
 
 const MAIN_MENU_LEVEL_NAME = "MainMenu"
+const NEW_GAME_LEVEL = "PeacefulHospital"
 
 @onready var _state_machine : GameStateMachine = $/root/Main/GameStateMachine
 @onready var _persistent_data : DataSaveLoad = $/root/Main/Services/DataSaveLoad
@@ -14,6 +15,8 @@ func load_level(level_name: String, save_name: String = ""):
 		_state_machine.change_state(GlobalEnums.GameStates.DATA_LOAD_STATE, save_name)
 	_state_machine.change_state(GlobalEnums.GameStates.ACTIVE_GAME_STATE)
 	
+func start_new_game():
+	GameCycle.load_level(NEW_GAME_LEVEL)
 
 func get_current_state() -> GlobalEnums.GameStates:
 	return _state_machine.get_current_state()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4l11nyv5t1iq"]
+[gd_scene load_steps=17 format=3 uid="uid://d4l11nyv5t1iq"]
 
 [ext_resource type="Script" path="res://scripts/Bootstrap.gd" id="1_2m3l7"]
 [ext_resource type="Script" path="res://scripts/services/GamePause.gd" id="1_l3qkl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/DataLoadState.gd" id="6_2tou2"]
 [ext_resource type="Script" path="res://scripts/services/InputParser.gd" id="7_1l08v"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/ActiveGameState.gd" id="7_t4svj"]
+[ext_resource type="Resource" uid="uid://ymiqnr7t138i" path="res://resources/instances/levels/PeacefulHospital.tres" id="8_52lld"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/PausedState.gd" id="8_s1hki"]
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/QuittingGameState.gd" id="9_m36en"]
 [ext_resource type="PackedScene" uid="uid://b5lqnvq8noy8a" path="res://scenes/ui/screens/Pause.tscn" id="10_w2tw1"]
@@ -40,7 +41,7 @@ script = ExtResource("1_l3qkl")
 [node name="LevelLoader" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent")]
 script = ExtResource("2_mdci6")
 _level_parent = NodePath("../../LevelParent")
-_levels = Array[Resource("res://resources/templates/Level.gd")]([ExtResource("3_m7q4d"), ExtResource("4_06ltl")])
+_levels = Array[Resource("res://resources/templates/Level.gd")]([ExtResource("3_m7q4d"), ExtResource("4_06ltl"), ExtResource("8_52lld")])
 
 [node name="DataSaveLoad" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
 script = ExtResource("3_l3wq0")

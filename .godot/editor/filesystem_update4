@@ -1,9 +1,3 @@
-res://scenes/architecture/Main.tscn
-res://scenes/ui/screens/Pause.tscn
-res://scenes/ui/Buttons.tscn
-res://scenes/ui/screens/Loading.tscn
-res://scenes/ui/screens/MainMenuUI.tscn
-res://scenes/ui/submenus/Settings.tscn
-res://scenes/ui/submenus/additional/VolumeAdjusters.tscn
-res://scenes/ui/submenus/additional/SaveCard.tscn
-res://scenes/ui/submenus/additional/SreenOptions.tscn
+res://scenes/levels/PeacefulHospital.tscn
+res://shaders/Celling.gdshader
+res://scenes/levels/PeacefulHospital.tres

@@ -1,5 +1,5 @@
 class_name VolumeAdjusters
-extends GridContainer
+extends Control
 
 @export var master : Slider
 @export var music : Slider
@@ -7,19 +7,17 @@ extends GridContainer
 @export var voice : Slider
 
 
-func _ready():
-	sync_with_Settings()
-	
-	master.changed.connect(func(value: float): 
+func _ready():	
+	master.value_changed.connect(func(value: float): 
 		Settings.master_volume = value
 		Settings.apply_sound_settings())
-	music.changed.connect(func(value: float): 
+	music.value_changed.connect(func(value: float): 
 		Settings.music_volume = value
 		Settings.apply_sound_settings())
-	sfx.changed.connect(func(value: float): 
+	sfx.value_changed.connect(func(value: float): 
 		Settings.sfx_volume = value
 		Settings.apply_sound_settings())
-	voice.changed.connect(func(value: float): 
+	voice.value_changed.connect(func(value: float): 
 		Settings.voice_volume = value
 		Settings.apply_sound_settings())
 

@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://6pib13net55n"]
+
+[ext_resource type="PackedScene" uid="uid://5i8ss0lsc4xa" path="res://scenes/gameplay/TESTPlayer.tscn" id="1_otyqq"]
+[ext_resource type="Texture2D" uid="uid://cbc5qddhgi8dp" path="res://textures/texture_01.png" id="2_tmt1x"]
+[ext_resource type="Shader" path="res://shaders/Celling.gdshader" id="3_3806w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5186f"]
+albedo_texture = ExtResource("2_tmt1x")
+uv1_triplanar = true
+uv2_triplanar = true
+
+[sub_resource type="Environment" id="Environment_1gsiu"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 4.0
+
+[sub_resource type="Gradient" id="Gradient_o8g0m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_e8e5m"]
+noise_type = 2
+fractal_type = 0
+cellular_distance_function = 1
+cellular_jitter = 0.0
+cellular_return_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cqci7"]
+color_ramp = SubResource("Gradient_o8g0m")
+noise = SubResource("FastNoiseLite_e8e5m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wo3jf"]
+render_priority = 0
+shader = ExtResource("3_3806w")
+shader_parameter/tiling = Vector2(3.425, 2.185)
+shader_parameter/tile_noise = SubResource("NoiseTexture2D_cqci7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_cfk4q"]
+material = SubResource("ShaderMaterial_wo3jf")
+
+[node name="PeacefulHospital" type="Node3D"]
+
+[node name="TestPlayer" parent="." instance=ExtResource("1_otyqq")]
+transform = Transform3D(0.0413176, 0, 0.999146, 0, 1, 0, -0.999146, 0, 0.0413176, -4, 2, -1)
+
+[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 4)
+
+[node name="Prototype" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -0.5)
+size = Vector3(13, 7, 12)
+material = SubResource("StandardMaterial3D_5186f")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 3, -0.5)
+operation = 2
+size = Vector3(13, 7, 12)
+material = SubResource("StandardMaterial3D_5186f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1gsiu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10.44, -9.12694e-07, 0, 9.12694e-07, -10.44, 0, 0, 0, 10, 0, 3, 0)
+mesh = SubResource("BoxMesh_cfk4q")

@@ -4,7 +4,7 @@ extends CharacterBody3D
 #FIXME: This controller is only for test purposes until actual player controller is done.
 const DATA_KEY = "TESTPlayer"
 
-const SPEED = 5.0
+@export var speed = 4.0
 const JUMP_VELOCITY = 4.5
 const  MOUSE_SENSIVITY = 0.003
 
@@ -42,11 +42,11 @@ func _physics_process(delta):
 	var direction = (_camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
 	
@@ -56,9 +56,8 @@ func _unhandled_input(event):
 		var look_around = -event.relative.x
 		var nod = event.relative.y
 		
-		rotate_y(look_around*MOUSE_SENSIVITY)
-		_camera.rotate_x(nod*MOUSE_SENSIVITY)
+		var y_rotation = rotation.y + look_around*MOUSE_SENSIVITY
+		var x_cam_rotation = clamp(_camera.rotation.x - nod*MOUSE_SENSIVITY, deg_to_rad(-90), deg_to_rad(90))
 		
-		_camera.rotation.x = clamp(_camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-		
-		
+		rotation.y = y_rotation
+		_camera.rotation.x = x_cam_rotation
