@@ -34,7 +34,6 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("interaction"):
-		print("Interact ipnut pressed")
 		$Marker3D/InteractionArea.attempt_interaction()
 
 	if !is_on_floor():

@@ -10,11 +10,9 @@ func attempt_interaction():
 	if is_instance_valid(nearest_interactable):
 		nearest_interactable.emit_signal("interacted")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	var areas: Array[Area3D] = get_overlapping_areas()
 	var shortest_distance: float = INF
@@ -28,7 +26,3 @@ func _process(_delta):
 	if next_nearest_interactable != nearest_interactable:
 		nearest_interactable = next_nearest_interactable
 		emit_signal("nearest_interactable_changed", nearest_interactable)
-		if is_instance_valid(nearest_interactable):
-			print(nearest_interactable.action)
-		else:
-			print("Nothing to interact with")
