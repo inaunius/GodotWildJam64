@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://5i8ss0lsc4xa"]
+[gd_scene load_steps=6 format=3 uid="uid://5i8ss0lsc4xa"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/TESTPlayer.gd" id="1_8p6vx"]
 [ext_resource type="PackedScene" uid="uid://crfmkfj0mauwb" path="res://scenes/gameplay/interaction/InteractionArea.tscn" id="2_i3aft"]
+[ext_resource type="Script" path="res://scripts/gameplay/PhysicsPush.gd" id="3_54c22"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2cq4d"]
 
@@ -38,3 +39,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 42
 horizontal_alignment = 1
+
+[node name="Pusher" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_54c22")
+body = NodePath("..")

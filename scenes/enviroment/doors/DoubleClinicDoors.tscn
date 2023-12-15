@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://cm3dtt0flw5yw"]
+
+[ext_resource type="PackedScene" uid="uid://byeeddg4kkl7y" path="res://models/enviroment/doors/clinic/DoubleFrame.blend" id="1_tn6i5"]
+[ext_resource type="PackedScene" uid="uid://cnsi1mtdgkxtk" path="res://models/enviroment/doors/clinic/Door.blend" id="2_2r8tt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0nao7"]
+size = Vector3(1.22785, 2.11276, 0.141479)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0aky7"]
+height = 2.24652
+radius = 0.0291953
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mm7qx"]
+size = Vector3(2.55368, 2.23608, 3)
+
+[node name="DoubleClinicDoors" type="Node3D"]
+
+[node name="Left" type="RigidBody3D" parent="."]
+collision_layer = 7
+collision_mask = 2
+mass = 0.7
+
+[node name="LeftMesh" parent="Left" instance=ExtResource("2_2r8tt")]
+transform = Transform3D(1.09, 0, 0, 0, 1.09, 0, 0, 0, 1.09, 1.25724, 0, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636629, 1.08383, 0.0135498)
+shape = SubResource("BoxShape3D_0nao7")
+
+[node name="Right" type="RigidBody3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 7
+collision_mask = 2
+mass = 0.7
+
+[node name="RightMesh" parent="Right" instance=ExtResource("2_2r8tt")]
+transform = Transform3D(1.0906, 0, 7.81597e-14, 0, 1.0906, 0, -7.81597e-14, 0, 1.0906, 1.25344, 0, -9.25554e-09)
+
+[node name="Collision" type="CollisionShape3D" parent="Right"]
+transform = Transform3D(1, 0, 1.12266e-12, 0, 1, 0, -1.12266e-12, 0, 1, 0.634024, 1.09116, 0.0154419)
+shape = SubResource("BoxShape3D_0nao7")
+
+[node name="LeftJamb" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07809, 0, 0)
+
+[node name="LeftHinge" type="HingeJoint3D" parent="LeftJamb"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91068e-15, 0.159714, 0, 0)
+node_a = NodePath("../../Left")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/softness = 2.1
+angular_limit/relaxation = 0.6
+
+[node name="Collision" type="CollisionShape3D" parent="LeftJamb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175279, 1.10895, 0)
+shape = SubResource("CylinderShape3D_0aky7")
+
+[node name="RightJamb" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12774, 0, 0)
+
+[node name="RightHinge" type="HingeJoint3D" parent="RightJamb"]
+transform = Transform3D(-6.38621e-08, 1, -4.37114e-08, -1.22559e-15, -4.37114e-08, -1, -1, -6.38621e-08, 7.61296e-15, -0.144599, 0, 0)
+node_a = NodePath("../../Right")
+node_b = NodePath("..")
+angular_limit/enable = true
+angular_limit/softness = 2.1
+angular_limit/relaxation = 0.6
+
+[node name="Collision" type="CollisionShape3D" parent="RightJamb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.156541, 1.119, 0)
+shape = SubResource("CylinderShape3D_0aky7")
+
+[node name="CenterAttraction" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.940956, 0)
+collision_layer = 4
+collision_mask = 4
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 1.896
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 0.797
+
+[node name="Collision" type="CollisionShape3D" parent="CenterAttraction"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00532532, 0.179321, -0.0019598)
+shape = SubResource("BoxShape3D_mm7qx")
+
+[node name="DoubleFrame" parent="." instance=ExtResource("1_tn6i5")]
+transform = Transform3D(1.09592, 0, 0, 0, 1.09592, 0, 0, 0, 1.09592, 0, 5.67663e-08, 0)

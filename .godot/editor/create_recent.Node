@@ -1,3 +1,5 @@
+Node
+Node3D
 MeshInstance3D
 WorldEnvironment
 Marker3D
@@ -10,6 +12,3 @@ Control
 OptionButton
 HBoxContainer
 BoxContainer
-VBoxContainer
-LineEdit
-TextEdit

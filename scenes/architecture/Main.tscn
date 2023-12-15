@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4l11nyv5t1iq"]
+[gd_scene load_steps=18 format=3 uid="uid://d4l11nyv5t1iq"]
 
 [ext_resource type="Script" path="res://scripts/Bootstrap.gd" id="1_2m3l7"]
 [ext_resource type="Script" path="res://scripts/services/GamePause.gd" id="1_l3qkl"]
@@ -16,18 +16,21 @@
 [ext_resource type="Script" path="res://scripts/game_state_machine/states/QuittingGameState.gd" id="9_m36en"]
 [ext_resource type="PackedScene" uid="uid://b5lqnvq8noy8a" path="res://scenes/ui/screens/Pause.tscn" id="10_w2tw1"]
 [ext_resource type="PackedScene" uid="uid://f8do6ldgntr3" path="res://scenes/ui/screens/Loading.tscn" id="11_ucfuu"]
+[ext_resource type="Script" path="res://scripts/game_state_machine/states/DeadCharacterState.gd" id="15_mkvk1"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2m3l7")
 
-[node name="LevelParent" type="CanvasLayer" parent="."]
+[node name="Screens" type="Node" parent="."]
 
-[node name="PauseUI" parent="." instance=ExtResource("10_w2tw1")]
+[node name="LevelParent" type="CanvasLayer" parent="Screens"]
+
+[node name="PauseUI" parent="Screens" instance=ExtResource("10_w2tw1")]
 process_mode = 3
 layer = 2
 visible = false
 
-[node name="LoadingUI" parent="." instance=ExtResource("11_ucfuu")]
+[node name="LoadingUI" parent="Screens" instance=ExtResource("11_ucfuu")]
 layer = 3
 visible = false
 
@@ -40,17 +43,12 @@ script = ExtResource("1_l3qkl")
 
 [node name="LevelLoader" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent")]
 script = ExtResource("2_mdci6")
-_level_parent = NodePath("../../LevelParent")
+_level_parent = NodePath("../../Screens/LevelParent")
 _levels = Array[Resource("res://resources/templates/Level.gd")]([ExtResource("3_m7q4d"), ExtResource("4_06ltl"), ExtResource("8_52lld")])
 
 [node name="DataSaveLoad" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
 script = ExtResource("3_l3wq0")
-_level_parent = NodePath("../../LevelParent")
-_level_loader = NodePath("../LevelLoader")
-
-[node name="DataSaveLoad2" type="Node" parent="Services" node_paths=PackedStringArray("_level_parent", "_level_loader")]
-script = ExtResource("3_l3wq0")
-_level_parent = NodePath("../../LevelParent")
+_level_parent = NodePath("../../Screens/LevelParent")
 _level_loader = NodePath("../LevelLoader")
 
 [node name="InputParser" type="Node" parent="Services" node_paths=PackedStringArray("_level_loader")]
@@ -60,34 +58,41 @@ _level_loader = NodePath("../LevelLoader")
 
 [node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("_assign_states")]
 script = ExtResource("4_ucw0j")
-_assign_states = [NodePath("LevelLoadState"), NodePath("DataLoadState"), NodePath("ActiveGameState"), NodePath("PausedState"), NodePath("QuittingGameState")]
+_assign_states = [NodePath("LevelLoadState"), NodePath("DataLoadState"), NodePath("ActiveGameState"), NodePath("DeadCharacterState"), NodePath("PausedState"), NodePath("QuittingGameState")]
 
 [node name="LevelLoadState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_level_loader", "_level_load_ui", "_state_machine")]
 script = ExtResource("5_14v7s")
 _level_loader = NodePath("../../Services/LevelLoader")
-_level_load_ui = NodePath("../../LoadingUI")
+_level_load_ui = NodePath("../../Screens/LoadingUI")
 _state_machine = NodePath("..")
 
 [node name="DataLoadState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_persistent_data", "_level_load_ui", "_state_machine")]
 script = ExtResource("6_2tou2")
 _persistent_data = NodePath("../../Services/DataSaveLoad")
-_level_load_ui = NodePath("../../LoadingUI")
+_level_load_ui = NodePath("../../Screens/LoadingUI")
 _state_machine = NodePath("..")
 enum_key = 1
 
 [node name="ActiveGameState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_level_loader", "_loading_ui", "_pause_ui", "_state_machine")]
 script = ExtResource("7_t4svj")
 _level_loader = NodePath("../../Services/LevelLoader")
-_loading_ui = NodePath("../../LoadingUI")
-_pause_ui = NodePath("../../PauseUI")
+_loading_ui = NodePath("../../Screens/LoadingUI")
+_pause_ui = NodePath("../../Screens/PauseUI")
 _state_machine = NodePath("..")
 enum_key = 2
+
+[node name="DeadCharacterState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_death_screen", "_game_pause", "_state_machine")]
+script = ExtResource("15_mkvk1")
+_death_screen = NodePath("../../Screens/PauseUI")
+_game_pause = NodePath("../../Services/GamePause")
+_state_machine = NodePath("..")
+enum_key = 4
 
 [node name="PausedState" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("_game_pause", "_pause_ui", "_state_machine")]
 process_mode = 3
 script = ExtResource("8_s1hki")
 _game_pause = NodePath("../../Services/GamePause")
-_pause_ui = NodePath("../../PauseUI")
+_pause_ui = NodePath("../../Screens/PauseUI")
 _state_machine = NodePath("..")
 enum_key = 3
 
@@ -95,4 +100,4 @@ enum_key = 3
 process_mode = 3
 script = ExtResource("9_m36en")
 _state_machine = NodePath("..")
-enum_key = 4
+enum_key = 5

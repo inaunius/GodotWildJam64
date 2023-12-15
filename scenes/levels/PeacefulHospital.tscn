@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://6pib13net55n"]
+[gd_scene load_steps=8 format=3 uid="uid://6pib13net55n"]
 
 [ext_resource type="PackedScene" uid="uid://5i8ss0lsc4xa" path="res://scenes/gameplay/TESTPlayer.tscn" id="1_otyqq"]
 [ext_resource type="Texture2D" uid="uid://cbc5qddhgi8dp" path="res://textures/texture_01.png" id="2_tmt1x"]
-[ext_resource type="Shader" path="res://shaders/Celling.gdshader" id="3_3806w"]
+[ext_resource type="PackedScene" uid="uid://cm3dtt0flw5yw" path="res://scenes/enviroment/doors/DoubleClinicDoors.tscn" id="3_lquio"]
+[ext_resource type="PackedScene" uid="uid://thtykf8lptxy" path="res://models/enemies/Guard.blend" id="4_skr0w"]
+[ext_resource type="PackedScene" uid="uid://0oxya0th4bwq" path="res://models/enemies/Nurse.blend" id="5_ssdy7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5186f"]
 albedo_texture = ExtResource("2_tmt1x")
@@ -11,45 +13,25 @@ uv2_triplanar = true
 
 [sub_resource type="Environment" id="Environment_1gsiu"]
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 4.0
-
-[sub_resource type="Gradient" id="Gradient_o8g0m"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_e8e5m"]
-noise_type = 2
-fractal_type = 0
-cellular_distance_function = 1
-cellular_jitter = 0.0
-cellular_return_type = 4
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cqci7"]
-color_ramp = SubResource("Gradient_o8g0m")
-noise = SubResource("FastNoiseLite_e8e5m")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wo3jf"]
-render_priority = 0
-shader = ExtResource("3_3806w")
-shader_parameter/tiling = Vector2(3.425, 2.185)
-shader_parameter/tile_noise = SubResource("NoiseTexture2D_cqci7")
-
-[sub_resource type="BoxMesh" id="BoxMesh_cfk4q"]
-material = SubResource("ShaderMaterial_wo3jf")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
 
 [node name="PeacefulHospital" type="Node3D"]
-
-[node name="TestPlayer" parent="." instance=ExtResource("1_otyqq")]
-transform = Transform3D(0.0413176, 0, 0.999146, 0, 1, 0, -0.999146, 0, 0.0413176, -4, 2, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00308394, 3.21865e-05, -0.0123475)
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 4)
 
 [node name="Prototype" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.367902, 0, 0, -1.85662)
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -0.5)
-size = Vector3(13, 7, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 12.3354)
+size = Vector3(13, 7, 37.6709)
 material = SubResource("StandardMaterial3D_5186f")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Prototype"]
@@ -58,9 +40,132 @@ operation = 2
 size = Vector3(13, 7, 12)
 material = SubResource("StandardMaterial3D_5186f")
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 3, 17.2585)
+operation = 2
+size = Vector3(13, 7, 26.817)
+material = SubResource("StandardMaterial3D_5186f")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype"]
+transform = Transform3D(0.899981, 0.00230459, 0.00532364, -0.0022991, 0.899996, -0.000936963, -0.00532601, 0.000923354, 0.899984, 0.000329737, 0.973572, 5.48749)
+operation = 2
+size = Vector3(2.72241, 2.49683, 4.65149)
+material = SubResource("StandardMaterial3D_5186f")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1gsiu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-10.44, -9.12694e-07, 0, 9.12694e-07, -10.44, 0, 0, 0, 10, 0, 3, 0)
-mesh = SubResource("BoxMesh_cfk4q")
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.421481, 0.00185167, 0.906835, -0.000471308, 0.999997, -0.00226096, -0.906837, -0.00138035, -0.421479, 2.00749, 0.907414, -2.78936)
+light_color = Color(0.764706, 0, 0.152941, 1)
+light_energy = 19.465
+shadow_enabled = true
+spot_range = 68.626
+
+[node name="TestPlayer" parent="." instance=ExtResource("1_otyqq")]
+transform = Transform3D(-0.787674, -0.000458971, 0.00104709, -0.000454778, 0.787669, 0.00315387, -0.00104892, 0.00315326, -0.787668, -0.389306, 0.900983, 5.52159)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="TestPlayer/Camera" index="0"]
+transform = Transform3D(0.999999, 0.00115473, 4.79841e-06, -0.00115473, 0.999967, 0.008008, 4.44858e-06, -0.008008, 0.999968, -0.000232995, 0.030107, -0.0338802)
+spot_range = 4.84423
+spot_attenuation = 0.366021
+spot_angle = 57.75
+spot_angle_attenuation = 0.435275
+
+[node name="DoubleClinicDoors" parent="." instance=ExtResource("3_lquio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.124973, 0)
+
+[node name="Guard" parent="." instance=ExtResource("4_skr0w")]
+transform = Transform3D(-0.339853, 0, -0.0382588, 0, 0.342, 0, 0.0382588, 0, -0.339853, -2.81428, -0.15, -0.748861)
+
+[node name="Nurse" parent="." instance=ExtResource("5_ssdy7")]
+transform = Transform3D(-1.83151e-08, 0, -0.419, 0, 0.419, 0, 0.419, 0, -1.83151e-08, -3.26705, 1.25493, -3.49723)
+
+[node name="Cylinder_005" parent="Nurse" index="7"]
+transform = Transform3D(0.4, 1.77636e-15, 0, 0, 0, 0.4, 1.77636e-15, -0.4, 0, 0, -0.00437045, -1.1485)
+
+[node name="Skeleton3D" parent="Nurse/Armature" index="0"]
+bones/2/rotation = Quaternion(-0.402729, 0.00217151, -0.00436045, 0.915307)
+bones/3/rotation = Quaternion(-0.656659, -0.00173711, 0.0012858, 0.754185)
+bones/4/rotation = Quaternion(-0.262287, 3.68088e-10, 6.1872e-10, 0.96499)
+bones/13/position = Vector3(-0.104133, -0.0518849, -0.00113419)
+bones/14/rotation = Quaternion(-0.454064, 0.000242625, -0.000531868, 0.890969)
+bones/15/rotation = Quaternion(-0.538907, -0.000303655, 0.000499545, 0.842365)
+bones/16/rotation = Quaternion(0.969798, -3.36385e-09, 2.48592e-09, 0.24391)
+bones/26/rotation = Quaternion(-0.296338, 0.000508255, -0.00251706, 0.95508)
+bones/27/rotation = Quaternion(-0.657811, -1.34589e-09, 1.66577e-09, 0.753183)
+bones/28/rotation = Quaternion(-0.197337, 1.03693e-09, -3.64801e-09, 0.980336)
+bones/36/position = Vector3(0.00416844, 0.0277437, -0.00198623)
+bones/37/rotation = Quaternion(0.00533061, 0.890888, 0.45389, 0.0165871)
+bones/38/rotation = Quaternion(-0.0333874, 0.809915, -0.585576, 0.00487712)
+bones/39/rotation = Quaternion(0.116542, 0.000244884, 0.00278882, 0.993182)
+bones/47/position = Vector3(1.11504, -1.8932, -0.142766)
+bones/48/position = Vector3(-0.570467, -2.01241, -0.0627395)
+bones/49/position = Vector3(0.0828115, -2.03468, -1.15059)
+bones/50/position = Vector3(0.00810135, -2.1049, 0.58772)
+
+[node name="Tentacles_012" parent="Nurse/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.00026613, -0.117759, 0.438041, 0.00146565, -0.262824, -0.196263, 0.479998, 0.00073725, 0.000842196, -0.69216, -1.95939, -0.197968)
+
+[node name="Tentacles_014" parent="Nurse/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.00026605, -0.23245, 0.283388, 0.00146569, -0.170032, -0.387414, 0.479998, 0.000390362, 0.00134012, -0.853862, -1.88756, -0.198277)
+
+[node name="Tentacles_011" parent="Nurse/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.00026611, -0.23245, 0.283388, 0.00146572, -0.170032, -0.387414, 0.479998, 0.000390345, 0.00134018, -1.12016, -1.52351, -0.199536)
+
+[node name="Tentacles_010" parent="Nurse/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.000266099, -0.192998, -0.356277, 0.0014657, 0.213765, -0.321662, 0.479998, -0.000759772, 0.000784717, -1.02815, -0.767399, -0.201794)
+
+[node name="Tentacles_013" parent="Nurse/Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.000266099, -0.192998, -0.356277, 0.0014657, 0.213765, -0.321662, 0.479998, -0.000759772, 0.000784717, -1.42307, -1.1263, -0.200917)
+
+[node name="Tentacles_019" parent="Nurse/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.000215172, -0.170643, -0.38667, -0.000450655, 0.232002, -0.284405, 0.48, 0.000141335, -0.000440349, 1.00729, -1.97164, -0.203966)
+
+[node name="Tentacles_018" parent="Nurse/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.000215073, 0.258497, 0.211629, -0.000450541, -0.126978, 0.430828, 0.48, -3.36162e-06, 0.000499241, 0.861091, -2.07614, -0.204129)
+
+[node name="Tentacles_015" parent="Nurse/Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.000215116, 0.258497, 0.211629, -0.000450709, -0.126978, 0.430828, 0.48, -3.39312e-06, 0.000499387, 1.0716, -1.67027, -0.203653)
+
+[node name="Tentacles_017" parent="Nurse/Armature/Skeleton3D" index="8"]
+transform = Transform3D(-0.000215116, 0.258497, 0.211629, -0.000450709, -0.126978, 0.430828, 0.48, -3.39312e-06, 0.000499387, 1.05996, -1.67129, -0.20366)
+
+[node name="Tentacles_030" parent="Nurse/Armature/Skeleton3D" index="9"]
+transform = Transform3D(-0.000215184, 0.229513, -0.28996, -0.000450619, 0.173976, 0.382523, 0.48, 0.000266215, 0.000229194, 1.28685, -1.23195, -0.203145)
+
+[node name="Tentacles_016" parent="Nurse/Armature/Skeleton3D" index="10"]
+transform = Transform3D(-0.000215148, 0.229513, -0.28996, -0.00045072, 0.173976, 0.382522, 0.48, 0.000266235, 0.000229241, 0.965877, -0.805624, -0.202889)
+
+[node name="Tentacles_005" parent="Nurse/Armature/Skeleton3D" index="11"]
+transform = Transform3D(0.48, 1.02189e-07, -8.94542e-08, 1.86406e-07, -0.213997, 0.321236, 4.71697e-08, -0.192742, -0.356661, 0.0187131, -1.95311, -1.24368)
+
+[node name="Tentacles_007" parent="Nurse/Armature/Skeleton3D" index="12"]
+transform = Transform3D(0.48, 9.00764e-08, -8.82601e-08, 1.67129e-07, -0.11442, 0.440492, 1.25205e-07, -0.264295, -0.190701, 0.0187134, -1.836, -1.38192)
+
+[node name="Tentacles_004" parent="Nurse/Armature/Skeleton3D" index="13"]
+transform = Transform3D(0.48, 9.51538e-08, -1.04336e-07, 1.58743e-07, -0.11442, 0.440492, 1.03741e-07, -0.264295, -0.190701, 0.0187128, -1.42207, -1.56112)
+
+[node name="Tentacles_006" parent="Nurse/Armature/Skeleton3D" index="14"]
+transform = Transform3D(0.48, 7.45058e-08, -1.10129e-07, -4.47035e-08, 0.243466, 0.256408, 1.58325e-07, -0.153845, 0.405777, 0.018713, -0.993253, -1.76285)
+
+[node name="Tentacles_003" parent="Nurse/Armature/Skeleton3D" index="15"]
+transform = Transform3D(0.48, 3.20985e-08, -3.41068e-08, -2.70177e-08, 0.243466, 0.256408, 5.70667e-08, -0.153845, 0.405777, 0.018713, -0.706714, -1.31266)
+
+[node name="Tentacles_026" parent="Nurse/Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.479707, 0.00897451, 0.00758368, 0.0157411, -0.196039, -0.351282, -0.00578432, 0.21079, -0.327022, 0.0231732, -2.09668, 0.635246)
+
+[node name="Tentacles_025" parent="Nurse/Armature/Skeleton3D" index="17"]
+transform = Transform3D(0.479721, 0.00716941, 0.0111846, 0.0154603, -0.133905, -0.424681, -0.00537169, 0.254877, -0.22343, 0.0202703, -1.96185, 0.764385)
+
+[node name="Tentacles_024" parent="Nurse/Armature/Skeleton3D" index="18"]
+transform = Transform3D(0.479721, 0.00716938, 0.0111846, 0.0154602, -0.133905, -0.424681, -0.00537164, 0.254877, -0.22343, 0.00976003, -1.56278, 0.974339)
+
+[node name="Tentacles_023" parent="Nurse/Armature/Skeleton3D" index="19"]
+transform = Transform3D(0.47989, 0.00236137, -0.00948062, -0.0096497, 0.194485, -0.353891, 0.00350057, 0.2124, 0.324147, -0.00193724, -1.11675, 1.20168)
+
+[node name="Tentacles_022" parent="Nurse/Armature/Skeleton3D" index="20"]
+transform = Transform3D(0.47989, 0.00236133, -0.00948067, -0.00964972, 0.194485, -0.353891, 0.00350067, 0.2124, 0.324147, 0.00861748, -0.722129, 0.842602)
+
+[editable path="TestPlayer"]
+[editable path="Nurse"]
