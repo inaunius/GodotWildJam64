@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2w2wdbclppjg"]
+[gd_scene load_steps=14 format=3 uid="uid://b2w2wdbclppjg"]
 
 [ext_resource type="PackedScene" uid="uid://5i8ss0lsc4xa" path="res://scenes/gameplay/TESTPlayer.tscn" id="1_qr4qj"]
+[ext_resource type="PackedScene" uid="uid://28on3746h0u1" path="res://scenes/gameplay/TESTInteractableObject.tscn" id="2_ubktq"]
 
 [sub_resource type="Gradient" id="Gradient_kisp4"]
 offsets = PackedFloat32Array(0, 0.488636, 1)
@@ -96,3 +97,6 @@ shape = SubResource("BoxShape3D_bph2w")
 [node name="Mesh" type="MeshInstance3D" parent="Location/Boxes/Box3"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_gooa8")
+
+[node name="TESTInteractableObject" parent="Location" instance=ExtResource("2_ubktq")]
+transform = Transform3D(0.846574, 0.532271, 0, -0.532271, 0.846574, 0, 0, 0, 1, 0, 0, 2.23709)

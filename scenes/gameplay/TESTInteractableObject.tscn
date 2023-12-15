@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://28on3746h0u1"]
+
+[ext_resource type="PackedScene" uid="uid://dk4kdfmujjw6t" path="res://scenes/gameplay/interaction/InteractableArea.tscn" id="1_3ehil"]
+[ext_resource type="Script" path="res://scripts/gameplay/TESTInteractableObject.gd" id="1_qd464"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kurrw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdnsj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5t5g8"]
+material = SubResource("StandardMaterial3D_gdnsj")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrccq"]
+
+[node name="TESTInteractableObject" type="StaticBody3D"]
+script = ExtResource("1_qd464")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kurrw")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5t5g8")
+
+[node name="InteractableArea" parent="." instance=ExtResource("1_3ehil")]
+action = "Change Color"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+shape = SubResource("BoxShape3D_mrccq")
