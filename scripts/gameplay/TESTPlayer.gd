@@ -29,9 +29,14 @@ func on_load_data(data: Resource):
 	rotation = data_to_load.rotation
 	_camera.rotation = data_to_load.camera_rotation
 
-
+func _ready():
+	$Marker3D/InteractionArea.nearest_interactable_changed.connect(func(interactable: InteractableArea): _update_interaction_text(interactable))
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("interaction"):
+		print("Interact ipnut pressed")
+		$Marker3D/InteractionArea.attempt_interaction()
+
 	if !is_on_floor():
 		velocity.y -= gravity * delta
 
@@ -61,3 +66,9 @@ func _unhandled_input(event):
 		
 		rotation.y = y_rotation
 		_camera.rotation.x = x_cam_rotation
+
+func _update_interaction_text(interactable: InteractableArea):
+	if is_instance_valid(interactable):
+		$InteractionLabel.text = "Interact to %s" % interactable.action
+	else:
+		$InteractionLabel.text = ""
